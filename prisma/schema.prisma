@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
 }
 
 datasource db {
@@ -21,8 +22,8 @@ model user{
 model drive{
   id Int @id @default(autoincrement())
   path String @unique @db.VarChar(200)
-  totalCapacity Int @db.UnsignedInt
-  usingCapacity Int @db.UnsignedInt
+  totalCapacity Float
+  usingCapacity Float @default(0)
   userId Int
   owner user @relation(fields: [userId], references: [id]) 
 }

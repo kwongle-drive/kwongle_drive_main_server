@@ -15,9 +15,24 @@ app.use(express.urlencoded({ extended: false }));
 //define router
 const authRouter= require(path.join(__dirname,'./Routes/authRouter'));
 
+
 app.use('/auth', authRouter);
+
+// error handler middleware
+app.use(function(err, req, res, next) {
+    // Do logging and user-friendly error message display
+    console.error(err.stack);
+    const status = err.status;
+    const response = {
+        success : false,
+        message : err.message
+    }
+    res.status(status).send(response);
+});
 
 
 app.listen(app.get('port'),()=>{
     console.log('listeing on port ', app.get('port'));
 })
+
+
