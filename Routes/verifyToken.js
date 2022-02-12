@@ -1,13 +1,11 @@
 const jwt = require('jsonwebtoken');
 
-
 const verifyToken = (req, res, next) => {
-	console.log(authHeader);
-	if (req.headers.accessToken) {
-		const accessToken = req.headers.accessToken.split(" ")[2];
-
+	console.log(req.body);
+	if (req.headers["x-access-token"]) {
+		const accessToken = req.headers["x-access-token"].split(" ")[1];
 		jwt.verify(accessToken, process.env.JWT_SEC, (err, user) => {
-			if (err) res.status(403).json("Token is not valid");
+			if (err) return next(new Error("verifyToken",403,"Token is not valid"));
 			else {
 				req.user = user;
                 console.log(user);
@@ -15,17 +13,22 @@ const verifyToken = (req, res, next) => {
 			}
 		});
 	} else {
-		return res.status(401).json("You are not authenticated");
+		return next(new Error("verifyToken",401,"You are not Authenticated"));
 	}
 };
 
 const verifyTokenAndAuthorization = (req, res, next) => {
 	verifyToken(req, res, () => {
-		if (req.user.id === req.params.user_id || req.user.id == req.body.user_id) {
+		if (req.user.id === req.params.userId || req.user.id == req.body.userId) {
 			next();
 		} else {
-			res.status(403).json("You are not allowed to do that");
+			// const error 
+			return next(new Error("verifyToken",403,"You are not allowed to do that"));
 		}
 	});
 };
 
+module.exports = {
+	verifyToken, 
+	verifyTokenAndAuthorization
+}

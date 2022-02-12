@@ -14,9 +14,10 @@ app.use(express.urlencoded({ extended: false }));
 
 //define router
 const authRouter= require(path.join(__dirname,'./Routes/authRouter'));
-
+const driveRouter= require(path.join(__dirname,'./Routes/driveRouter'));
 
 app.use('/auth', authRouter);
+app.use('/drive', driveRouter);
 
 // error handler middleware
 app.use(function(err, req, res, next) {
@@ -27,7 +28,7 @@ app.use(function(err, req, res, next) {
         success : false,
         message : err.message
     }
-    res.status(status).send(response);
+    res.status(status | 500).send(response);
 });
 
 
