@@ -23,6 +23,7 @@ router.post('/login', async (req, res, next) => {
             }
         })
     } catch(err){
+        console.error(err);
         const error = new CustomError('AUTH', 501, "Internal Server Error");
         return next(error);
     }
@@ -75,7 +76,7 @@ router.post('/signup', async (req, res, next) => {
         }
         res.status(201).json(response);
     } catch (err) {
-        console.log(err)
+        console.error(err);
         const error = new CustomError('AUTH', 401, "유저 생성에 실패하였습니다.");
         next(error);
         return;

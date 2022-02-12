@@ -27,7 +27,7 @@ router.post('/',verifyTokenAndAuthorization,async (req,res,next)=>{
         });
     }catch(err){
         console.error(err);
-        err = new CustomError("DRIVE", 500,"이미 드라이브가 생성되어있습니다.");
+        err = new CustomError("DRIVE", 500,"유저 드라이브 생성 오류");
         next(err)
     }
    
