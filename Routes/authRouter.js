@@ -39,7 +39,6 @@ router.post('/login', async (req, res) => {
         email: user.email,
         id: user.id
     },process.env.JWT_SEC,{expiresIn: "2d"});
-    // res.status(200).json
     res.status(200).json({
         success:true,
         message: "로그인이 되었습니다.",
