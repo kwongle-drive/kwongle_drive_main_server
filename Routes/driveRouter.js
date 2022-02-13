@@ -4,45 +4,50 @@ const jwt = require('jsonwebtoken');
 const path = require('path');
 const fs = require('fs').promises;
 const CustomError = require('../errors/CustomError');
-const { PrismaClient } = require('@prisma/client');
 const {verifyToken,verifyTokenAndAuthorization} = require('./verifyToken');
-const prisma = new PrismaClient();
+const driveService = require('../Service/driveService');
+
+/**************************************
+ * 1. 유저 드라이브 생성하기
+ * 2. Path내 파일 및 폴더 구조 가져오기
+ * 3. 디렉토리 정보 가져오기           
+ * 4. 파일 정보 가져오기               
+ **************************************/
 
 //유저 드라이브 생성하기
 router.post('/',verifyTokenAndAuthorization,async (req,res,next)=>{
     const {userId, capacity} = req.body;
-    
     try{
-        await createNewDrivePath(userId);
-        await prisma.drive.create({
-            data:{
-                userId,
-                totalCapacity:capacity,
-                path: userId.toString()
-            }
-        });
-        res.status(201).json({
-            "success": true,
-            "message": "드라이브가 성공적으로 생성되었습니다.",
-        });
+        const { success, message } = await driveService.createDrive(userId,capacity);
+        res.status(201).json({success,message});
     }catch(err){
-        console.error(err);
-        err = new CustomError("DRIVE", 500,"유저 드라이브 생성 오류");
+        console.error(err)
         next(err)
     }
-   
 })
 
 
-const createNewDrivePath = async (userId)=>{
-    userId = userId.toString()
-    const newDir = path.join(process.env.DRIVE_PATH, userId);
-    await fs.mkdir(newDir,(err)=>{
-        if(err) {
-            throw err;
-        }
-    });
-    return path;
-}
+//Path내 파일 및 폴더 구조 가져오기 query parameter : { userId : 1} 최상위 디렉토리
+router.get('/directory/',verifyTokenAndAuthorization, async (req, res, next)=>{
+    try{
+        const {success, message, rootPath, files } = await driveService.getPathInfo(req.query.userId,"");
+        res.status(200).json({success, message, rootPath, files });
+    }catch(err){
+        next(err);
+    }
+})
+
+
+//Path내 파일 및 폴더 구조 가져오기 query parameter : { userId : 1}
+router.get('/directory/:path',verifyTokenAndAuthorization, async (req, res, next)=>{
+    try{
+        const {success, message, rootPath, files } = await driveService.getPathInfo(req.query.userId,req.params.path);
+        res.status(200).json({success, message, rootPath, files });
+    }catch(err){
+        next(err);
+    }
+})
+
+
 
 module.exports = router;
