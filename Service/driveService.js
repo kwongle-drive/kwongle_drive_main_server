@@ -50,7 +50,7 @@ exports.getPathInfo = async function (userId, targetPath) {
             }
         });
         const fullPath = path.join(process.env.DRIVE_PATH, userPath.path, targetPath);
-        const files = await getTargetPathInfo(fullPath, targetPath);
+        const files = await  getFilesInfoInPath(fullPath, targetPath);
         return {
             success: true,
             message: "",
@@ -63,7 +63,7 @@ exports.getPathInfo = async function (userId, targetPath) {
     }
 }
 
-const getTargetPathInfo = async (fullPath, targetPath) => {
+const getFilesInfoInPath = async (fullPath, targetPath) => {
     let info = [];
     const files = await fs.readdir(fullPath);
     for (let i = 0; i < files.length; i++) {
