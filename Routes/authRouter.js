@@ -21,7 +21,6 @@ router.post('/login', async (req, res, next) => {
             userId
         })
     }catch(err){
-        console.error(err);
         next(err);
     }
     
@@ -37,10 +36,7 @@ router.post('/signup', async (req, res, next) => {
         const {success, message, status} = await authService.signUp(user);
         res.status(status).json({success,message});
     } catch (err) {
-        console.error(err);
-        const error = new CustomError('AUTH', 401, "유저 생성에 실패하였습니다.");
         next(error);
-        return;
     }
 });
 
