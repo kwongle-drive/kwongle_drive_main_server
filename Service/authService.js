@@ -4,7 +4,6 @@ const path = require('path');
 const fs = require('fs').promises;
 const CustomError = require('../errors/CustomError');
 const { PrismaClient } = require('@prisma/client');
-const { nextTick } = require('process');
 const prisma = new PrismaClient();
 
 exports.login = async function(userReq){
@@ -50,17 +49,21 @@ exports.login = async function(userReq){
 
 exports.signUp = async function(userReq) {
     const { email, password } = userReq;
-
-    const savedUser = await prisma.user.create({
-        data: {
-            email,
-            password,
-        }
-    });
-
-    return {
-        success: true,
-        message: "유저가 성공적으로 생성되었습니다",
-        status: 201
-    };
+    try{
+        const savedUser = await prisma.user.create({
+            data: {
+                email,
+                password,
+            }
+        });
+        
+        return {
+            success: true,
+            message: "유저가 성공적으로 생성되었습니다",
+            status: 201
+        };
+    }catch(err){
+        throw new CustomError('AUTH', 401, "유저 생성에 실패하였습니다.");
+    }
+    
 }
