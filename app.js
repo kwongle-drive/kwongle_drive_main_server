@@ -8,9 +8,9 @@ dotenv.config();
 const app = express();
 app.use(morgan('dev'));
 app.set("port", process.env.PORT || 3001);
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 
 //define router
 const authRouter= require(path.join(__dirname,'./Routes/authRouter'));
