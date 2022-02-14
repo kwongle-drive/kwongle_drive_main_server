@@ -21,6 +21,7 @@ const verifyToken = (req, res, next) => {
 const verifyTokenAndAuthorization = (req, res, next) => {
 	verifyToken(req, res, (err) => {
 		if(err) return next(err);
+		// console.log(req.user)
 		if (req.user.id === req.params.userId || req.user.id == req.body.userId || req.query.userId == req.user.id) {
 			next();
 		} else {
