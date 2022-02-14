@@ -16,8 +16,10 @@ app.use(express.urlencoded({ extended: false }));
 const authRouter = require('./Routes/authRouter');
 const driveRouter = require('./Routes/driveRouter');
 const fileRouter = require('./Routes/fileRouter');
+
 app.use('/auth', authRouter);
 app.use('/drive', driveRouter);
+app.use('/file', fileRouter);
 
 // error handler middleware
 app.use(function(err, req, res, next) {
@@ -28,7 +30,7 @@ app.use(function(err, req, res, next) {
         success : false,
         message : err.message
     }
-    res.status(status | 500).send(response);
+    res.status(status || 500).send(response);
 });
 
 
