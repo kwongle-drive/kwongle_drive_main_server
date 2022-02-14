@@ -13,9 +13,9 @@ app.use(express.urlencoded({ extended: false }));
 
 
 //define router
-const authRouter= require(path.join(__dirname,'./Routes/authRouter'));
-const driveRouter= require(path.join(__dirname,'./Routes/driveRouter'));
-
+const authRouter = require('./Routes/authRouter');
+const driveRouter = require('./Routes/driveRouter');
+const fileRouter = require('./Routes/fileRouter');
 app.use('/auth', authRouter);
 app.use('/drive', driveRouter);
 

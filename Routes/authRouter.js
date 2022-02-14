@@ -1,10 +1,5 @@
 const router = require('express').Router();
 const argon2 = require('argon2');
-const jwt = require('jsonwebtoken');
-const path = require('path');
-const fs = require('fs').promises;
-const CustomError = require('../errors/CustomError');
-
 const authService = require('../Service/authService');
 
 router.post('/login', async (req, res, next) => {

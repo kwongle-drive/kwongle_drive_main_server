@@ -72,11 +72,11 @@ const getFilesInfoInPath = async (fullPath, targetPath) => {
         const { name, ext } = path.parse(target);
         stat.filename = files[i];
         stat.extension = ext.split('.')[1];
-        stat.path = path.join(targetPath, files[i]); // 실제 구현시 path에 조인 걸어
+        stat.path = path.join(targetPath, files[i]); 
         stat.type = stat.isDirectory() ? "directory" : "file";
-        const { filename, type, extension, atime, ctime, mtime, birthtime } = stat;
+        const { filename, type, extension, atime, ctime, mtime, birthtime, size} = stat;
         const contentType = contentTypeMap[extension] ? contentTypeMap[extension] : null;
-        info.push({ filename, type, extension, path : stat.path ,contentType, atime, ctime, mtime, birthtime })
+        info.push({ filename, type, extension, path : stat.path ,contentType, atime, ctime, mtime, birthtime, size })
     }
     return info;
 }
