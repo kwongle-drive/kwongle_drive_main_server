@@ -14,9 +14,12 @@
     "base62x": "^1.1.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
+    "fstream": "^1.0.12",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
-    "multer": "^1.4.4"
+    "multer": "^1.4.4",
+    "tar": "^6.1.11",
+    "zlib": "^1.0.5"
   },
   "devDependencies": {
     "prisma": "^3.9.2"
