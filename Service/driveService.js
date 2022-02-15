@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const fs = require('fs').promises;
+const { pathDecode, pathEncode } = require('../pathEncode');
 const CustomError = require('../errors/CustomError');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
@@ -40,6 +41,35 @@ exports.createDrive = async function (userId, capacity) {
 exports.getPathInfo = async function (userId, targetPath) {
     //유저 드라이브 경로 불러오기
     try{
+        userId = parseInt(userId);
+        let userPath = await prisma.drive.findFirst({
+            where: {
+                userId
+            },
+            select: {
+                path: true
+            }
+        });
+        const fullPath = path.join(process.env.DRIVE_PATH, userPath.path, targetPath);
+        const files = await  getFilesInfoInPath(fullPath, targetPath);
+        return {
+            success: true,
+            message: "",
+            rootPath: targetPath,
+            files
+        };
+    }catch(err){
+        console.error(err);
+        throw new CustomError("DRIVE", 500, "getPathInfo에러, 디렉토리 구조를 불러오지 못하였습니다.");
+    }
+}
+
+//Path내 파일 및 폴더 구조 정보 가져오기 with encryted Path
+exports.getPathInfoEncrypted = async function (userId, encodedPath) {
+    //유저 드라이브 경로 불러오기
+    try{
+        const targetPath = pathDecode(encodedPath);;
+        console.log(targetPath)
         userId = parseInt(userId);
         let userPath = await prisma.drive.findFirst({
             where: {

@@ -32,17 +32,28 @@ router.get('/directory/',verifyTokenAndAuthorization, async (req, res, next)=>{
 
 
 //Path내 파일 및 폴더 구조 가져오기 query parameter : { userId : 1}
-router.get('/directory/*',verifyTokenAndAuthorization, async (req, res, next)=>{
+// router.get('/directory/*',verifyTokenAndAuthorization, async (req, res, next)=>{
+//     try{
+//         //나중에 path를 클라이언트에서 암호화해서 보내면 서버에서 같은 키로 복호화하여 path를 꺼낸다. 일단 임시로 아래처럼 해놈
+//         const requestPath = req.originalUrl.split('?')[0].substring(17);
+//         const {success, message, rootPath, files } = await driveService.getPathInfo(req.query.userId,requestPath);
+//         res.status(200).json({success, message, rootPath, files });
+//     }catch(err){
+//         next(err);
+//     }
+// })
+
+
+//Path내 파일 및 폴더 구조 가져오기 query parameter : { userId : 1}
+router.get('/directory/:encodedPath',verifyTokenAndAuthorization, async (req, res, next)=>{
     try{
-        //나중에 path를 클라이언트에서 암호화해서 보내면 서버에서 같은 키로 복호화하여 path를 꺼낸다. 일단 임시로 아래처럼 해놈
-        const requestPath = req.originalUrl.split('?')[0].substring(17);
-        const {success, message, rootPath, files } = await driveService.getPathInfo(req.query.userId,requestPath);
+        // path를 클라이언트에서 base64로 인코딩해서 보내면 서버에서 디코딩하여 path를 꺼낸다
+        // const requestPath = req.originalUrl.split('?')[0].substring(17);
+        const {success, message, rootPath, files } = await driveService.getPathInfoEncrypted(req.query.userId, req.params.encodedPath);
         res.status(200).json({success, message, rootPath, files });
     }catch(err){
         next(err);
     }
 })
-
-
 
 module.exports = router;

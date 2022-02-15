@@ -11,7 +11,7 @@
   "dependencies": {
     "@prisma/client": "^3.9.2",
     "argon2": "^0.28.4",
-    "crypto-js": "^4.1.1",
+    "base62x": "^1.1.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
