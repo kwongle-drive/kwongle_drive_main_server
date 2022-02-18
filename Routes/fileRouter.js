@@ -7,8 +7,6 @@ const fs = require('fs');
 const fsPromise = require('fs').promises;
 const { constants } = require('buffer');
 const { PrismaClient } = require('@prisma/client');
-const { send } = require('process');
-const { accepts } = require('express/lib/request');
 const prisma = new PrismaClient();
 const { pathDecode, pathEncode } = require('../pathEncode');
 
