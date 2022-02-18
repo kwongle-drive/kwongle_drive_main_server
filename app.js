@@ -16,11 +16,11 @@ app.use(express.urlencoded({ extended: false }));
 const authRouter = require('./Routes/authRouter');
 const driveRouter = require('./Routes/driveRouter');
 const fileRouter = require('./Routes/fileRouter');
-
+const takeOutRouter = require('./Routes/takeOutRouter');
 app.use('/auth', authRouter);
 app.use('/drive', driveRouter);
 app.use('/file', fileRouter);
-
+app.use('/take_out',takeOutRouter);
 // error handler middleware
 app.use(function(err, req, res, next) {
     // Do logging and user-friendly error message display
