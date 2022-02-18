@@ -63,3 +63,16 @@ fs.rm('./drives/7/newDirectory',{force:true, recursive: true}).then(()=>{
 
 const pathEncode = require('./pathEncode');
 console.log(pathEncode.pathEncode("한글"))
+
+
+
+
+//sub 디렉토리 .. 방지
+console.log(isSubDirectory(__dirname,path.join(__dirname,'..')));
+
+function isSubDirectory(parent, child) {
+    console.log("parent",parent);
+    console.log("child",child);
+    const result = path.relative(child, parent);
+    return result.startsWith('..') || result === "";
+}
