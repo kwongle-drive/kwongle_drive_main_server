@@ -17,6 +17,7 @@ model user{
   password String
   created_at DateTime @default(now())
   drive drive?
+  takeout takeout_queue[]
 }
 
 model drive{
@@ -26,4 +27,13 @@ model drive{
   usingCapacity Float @default(0)
   userId Int
   owner user @relation(fields: [userId], references: [id]) 
+}
+
+model takeout_queue{
+  id Int @id @default(autoincrement())
+  capacity Int
+  user_id Int
+  finish Boolean @default(false)
+  expired_at DateTime
+  user user @relation(fields: [user_id],references: [id])
 }
