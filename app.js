@@ -20,7 +20,7 @@ const takeOutRouter = require('./Routes/takeOutRouter');
 app.use('/auth', authRouter);
 app.use('/drive', driveRouter);
 app.use('/file', fileRouter);
-app.use('/take_out',takeOutRouter);
+app.use('/takeout',takeOutRouter);
 // error handler middleware
 app.use(function(err, req, res, next) {
     // Do logging and user-friendly error message display
