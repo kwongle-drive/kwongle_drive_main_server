@@ -503,7 +503,7 @@
     |-  | - | - | - |
     1. addTakeOutRequest
         - EndPoint: [POST] /takeout
-        - Description: 유저의 드라이브를 생성합니다.
+        - Description: 유저의 테이크 아웃 요청을 큐에 등록합니다.
         
         **Request Example**
         
