@@ -1,7 +1,17 @@
 # KWONGLE DRIVE
-> 구글 드라이브(로컬 스토리지 기반) 클론 프로젝트
+> 구글 드라이브(로컬 스토리지 기반) 클론 프로젝트  
+  
+  
+## 사용 기술
+최신 수정 날짜: 2022/02/21
+- Node JS & Express
+- HTML/CSS/JAVSCRIPT, VUE JS
+- mysql
+- prisma
+- ...계속해서 추가
+## API 문서
 
-# API DOCS
+version: 1.0 (2022/02/21)
 
 <details>
 <summary>AUTH</summary>
