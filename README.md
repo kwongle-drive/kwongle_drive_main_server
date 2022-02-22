@@ -2,7 +2,7 @@
 > 구글 드라이브(로컬 스토리지 기반) 클론 프로젝트  
   
   
-## 사용 기술
+## 기술 스택
 최신 수정 날짜: 2022/02/21
 - Node JS & Express
 - HTML/CSS/JAVSCRIPT, VUE JS
