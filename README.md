@@ -146,7 +146,7 @@ version: 1.0 (2022/02/21)
         
         - EndPoint: [GET] drive/folders/{path}
         
-        ```jsx
+        ```js
         //RouteParameter : path정보가 들어감 ex) myPictures
         {
         	"path" : "FserjlWE" // {encodedPath} with base62
@@ -164,7 +164,7 @@ version: 1.0 (2022/02/21)
         
         **Response Example**
         
-        ```jsx
+        ```js
         {
         	"success": true,
           "error": null,
@@ -180,7 +180,7 @@ version: 1.0 (2022/02/21)
                     "atime":"2022-02-07T09:55:43.724Z",
                     "ctime":"2022-02-07T09:55:43.724Z",
                     "mtime":"2022-02-07T09:55:43.724Z",
-                    'birthtime': "2022-02-07T09:55:43.724Z"
+                    'birthtime': "2022-02-07T09:55:43.724Z",
         						"size" : 0
                 },
                 {
@@ -191,8 +191,8 @@ version: 1.0 (2022/02/21)
                     "path": "/documents/myVideo.mp4",
                     "atime":"2022-02-07T09:55:43.724Z",
                     "ctime":"2022-02-07T09:55:43.724Z",
-                    "mtime":"2022-02-07T09:55:43.724Z",
-                    'birthtime': "2022-02-07T09:55:43.724Z"
+                    "mtime":"2022-02-07T09:55:43.724Z",  
+                    'birthtime': "2022-02-07T09:55:43.724Z",  
         						"size" : 3423424
                 },
                 {
@@ -204,7 +204,7 @@ version: 1.0 (2022/02/21)
                     "atime":"2022-02-07T09:55:43.724Z",
                     "ctime":"2022-02-07T09:55:43.724Z",
                     "mtime":"2022-02-07T09:55:43.724Z",
-                    'birthtime': "2022-02-07T09:55:43.724Z"
+                    'birthtime': "2022-02-07T09:55:43.724Z",
         						"size" : 434322
                 },
                 {
@@ -216,11 +216,11 @@ version: 1.0 (2022/02/21)
                     "atime":"2022-02-07T09:55:43.724Z",
                     "ctime":"2022-02-07T09:55:43.724Z",
                     "mtime":"2022-02-07T09:55:43.724Z",
-                    'birthtime': "2022-02-07T09:55:43.724Z"
+                    'birthtime': "2022-02-07T09:55:43.724Z",
         						"size" : 344
                 }
             ]
-        };
+        }
         ```
 
 
