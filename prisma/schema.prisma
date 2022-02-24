@@ -32,8 +32,17 @@ model drive{
 model takeout_queue{
   id Int @id @default(autoincrement())
   capacity Int
-  user_id Int
+  userId Int
   finish Boolean @default(false)
-  expired_at DateTime
-  user user @relation(fields: [user_id],references: [id])
+  expired_at DateTime?
+  user user @relation(fields: [userId],references: [id])
+  takeout_result_path takeout_result_path[]
+}
+
+model takeout_result_path{
+  id Int @id @default(autoincrement())
+  USE_YN Boolean @default(true)
+  path String @db.VarChar(1000)
+  takeoutId Int
+  takeout takeout_queue @relation(fields: [takeoutId], references: [id])
 }
