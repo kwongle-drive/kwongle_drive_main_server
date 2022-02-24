@@ -6,9 +6,11 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 const app = express();
-app.use(morgan('dev'));
 app.set("port", process.env.PORT || 3001);
-app.use(express.json());
+
+
+app.use(morgan('dev'));
+app.use(express.json(),(req,res));
 app.use(express.urlencoded({ extended: false }));
 
 
@@ -17,10 +19,12 @@ const authRouter = require('./Routes/authRouter');
 const driveRouter = require('./Routes/driveRouter');
 const fileRouter = require('./Routes/fileRouter');
 const takeOutRouter = require('./Routes/takeOutRouter');
+//register router
 app.use('/auth', authRouter);
 app.use('/drive', driveRouter);
 app.use('/file', fileRouter);
 app.use('/takeout',takeOutRouter);
+
 // error handler middleware
 app.use(function(err, req, res, next) {
     // Do logging and user-friendly error message display
