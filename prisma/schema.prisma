@@ -1,8 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["interactiveTransactions"]
 }
 
@@ -11,39 +8,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user{
-  id Int @id @default(autoincrement()) 
-  email String @unique @db.VarChar(50) 
-  password String
-  created_at DateTime @default(now())
-  drive drive?
-  takeout takeout_queue[]
+model user {
+  id         Int             @id @default(autoincrement())
+  email      String          @unique @db.VarChar(50)
+  password   String
+  created_at DateTime        @default(now())
+  drive      drive?
+  takeout    takeout_queue[]
 }
 
-model drive{
-  id Int @id @default(autoincrement())
-  path String @unique @db.VarChar(200)
+model drive {
+  id            Int    @id @default(autoincrement())
+  path          String @unique @db.VarChar(200)
   totalCapacity Float
-  usingCapacity Float @default(0)
-  userId Int
-  owner user @relation(fields: [userId], references: [id]) 
+  usingCapacity Float  @default(0)
+  userId        Int    @unique
+  owner         user   @relation(fields: [userId], references: [id])
 }
 
-model takeout_queue{
-  id Int @id @default(autoincrement())
-  capacity Int
-  userId Int
-  finish Boolean @default(false)
-  expired_at DateTime?
-  user user @relation(fields: [userId],references: [id])
+model takeout_queue {
+  id                  Int                   @id @default(autoincrement())
+  capacity            Int
+  finish              Boolean               @default(false)
+  expired_at          DateTime?
+  created_at          DateTime?             @default(now())
+  userId              Int
+  user                user                  @relation(fields: [userId], references: [id])
   takeout_result_path takeout_result_path[]
+
+  @@index([userId], map: "takeout_queue_userId_fkey")
 }
 
-model takeout_result_path{
-  id Int @id @default(autoincrement())
-  USE_YN Boolean @default(true)
-  path String @db.VarChar(1000)
-  size Float //기가단위
+model takeout_result_path {
+  id        Int           @id @default(autoincrement())
+  USE_YN    Boolean       @default(true)
+  path      String        @db.VarChar(1000)
   takeoutId Int
-  takeout takeout_queue @relation(fields: [takeoutId], references: [id])
+  size      Float
+  takeout   takeout_queue @relation(fields: [takeoutId], references: [id])
+
+  @@index([takeoutId], map: "takeout_result_path_takeoutId_fkey")
 }
