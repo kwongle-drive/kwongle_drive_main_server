@@ -43,6 +43,7 @@ model takeout_result_path{
   id Int @id @default(autoincrement())
   USE_YN Boolean @default(true)
   path String @db.VarChar(1000)
+  size Float //기가단위
   takeoutId Int
   takeout takeout_queue @relation(fields: [takeoutId], references: [id])
 }
