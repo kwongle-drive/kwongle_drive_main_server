@@ -32,6 +32,7 @@ exports.createDrive = async function (userId, capacity) {
             message: "드라이브가 성공적으로 생성되었습니다.",
         };
     } catch (err) {
+        console.error(err)
         throw new CustomError("DRIVE", 500, "유저 드라이브 생성 오류");
     }
 }
@@ -115,8 +116,10 @@ const createNewDrivePath = async (userId) => {
     const newDir = path.join(process.env.DRIVE_PATH, userId);
     await fs.mkdir(newDir, (err) => {
         if (err) {
+            console.error(err);
             throw err;
         }
+        console.log("생성완료")
     });
     return path;
 }
