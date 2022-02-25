@@ -17,12 +17,18 @@
 - ...계속해서 추가
 ## API 문서
 
-version: 1.0 (2022/02/21)
+
+<details>
+<summary>version: 1.1 (2022/02/25)</summary>
+<div markdown="1">
+- version 1.1 :
+  takeout에 getTakeOutRequst와 getTakeOutRequestDownloadLinks API 추가됨
+</div>
+</details>
 
 <details>
 <summary>AUTH</summary>
 <div markdown="1">
-
 - auth
     
     
@@ -512,11 +518,11 @@ version: 1.0 (2022/02/21)
 
 - takeout
     
-    
     |  | 메서드 | 엔드포인트 | 구현  여부 |
     | --- | --- | --- | --- |
     | addTakeOutRequest | POST | /takeout | o |
-    |-  | - | - | - |
+    | getTakeOutRequest | GET | /takeout?userId={userId} | X |
+    | getTakeOutRequestDownladLinks | GET | /takeout/{takeoutId} | X |
     1. addTakeOutRequest
         - EndPoint: [POST] /takeout
         - Description: 유저의 테이크 아웃 요청을 큐에 등록합니다.
@@ -548,6 +554,106 @@ version: 1.0 (2022/02/21)
         {
         	"success": false,
         	"message": "takeout이 실패하였습니다",
+        }
+        ```
+          
+    2. getTakeOutRequest
+        - EndPoint: [GET] /takeout?userId={userId}
+        - Description:  특정 유저의 테이크 아웃 요청 리스트를 반환합니다.
+        
+        **Request Example**
+        
+        ```jsx
+        //Request Parameter
+        {
+        	"userId" : 1,
+        }
+        //Request Header
+        {
+        	"x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OThkZGI2MzIyYWMxMDExZTA"
+        }
+        ```
+        
+        **Response Example**
+        
+        ```jsx
+        {
+        	"success": true,
+        	"takeoutList":[
+        			{
+        					id : 1,
+        					capacity : 2,
+        					finish : true,
+        					expired_at : 2022-02-19 14:36:45.823,
+        					created_at : 2022-02-12 14:36:45.823,
+        			},
+        			{
+        					id : 2,
+        					capacity : 2,
+        					finish : false,
+        					expired_at : 2022-02-25 14:36:45.823,
+        					created_at : 2022-02-18 14:36:45.823,
+        			},
+        	]
+        }
+        ```
+        
+        ```jsx
+        {
+        	"success": false,
+        	"message": "user의 테이크아웃 리스트를 가져오지 못하였습니다.",
+        }
+        ```
+        
+    3. getTakeOutRequestDownladLinks
+        - EndPoint: [GET] /takeout/{takeoutId}?userId={userId}
+        - Description:  처리된 테이크 아웃의 다운로드 링크를 반환합니다
+        
+        **Request Example**
+        
+        ```jsx
+        //Route Parameter
+        {
+        	"takeoutId" : 1,
+        }
+        //Query Parameter
+        {
+        	"userId" : 1,
+        }
+        //Request Header
+        {
+        	"x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OThkZGI2MzIyYWMxMDExZTA"
+        }
+        ```
+        
+        **Response Example**
+        
+        ```jsx
+        {
+        	"success": true,
+        	"takeoutList":[
+        				{
+                  index: 0,
+                  link:"http://localhost:port/takeout/download/1/takeout-1645757597313-1-3",
+                  size: 209009302
+                },
+                {
+                  index: 1,
+                  link:"http://localhost:port/takeout/download/1/takeout-1645757597313-1-2",
+                  size: 20904302
+                },
+                {
+                  index: 2,
+                  link:"http://localhost:port/takeout/download/1/takeout-1645757597313-1-1",
+                  size: 232009302
+                }
+        }
+        ```
+        
+        ```jsx
+        {
+        	"success": false,
+        	"message": "다운로드 링크를 가져오지 못했습니다"
         }
         ```
 </div>
