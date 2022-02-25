@@ -193,7 +193,7 @@
                     "ctime":"2022-02-07T09:55:43.724Z",
                     "mtime":"2022-02-07T09:55:43.724Z",
                     'birthtime': "2022-02-07T09:55:43.724Z",
-        						"size" : 0
+        						"size" : 0 // 용량 단위 MB
                 },
                 {
                     'filename': "myVideo",
@@ -582,7 +582,7 @@
         	"takeoutList":[
         			{
         					id : 1,
-        					capacity : 2,
+        					capacity : 2, // 용량 단위 GB
         					finish : true,
         					expired_at : 2022-02-19 14:36:45.823,
         					created_at : 2022-02-12 14:36:45.823,
@@ -635,17 +635,17 @@
         				{
                   index: 0,
                   link:"http://localhost:port/takeout/download/1/takeout-1645757597313-1-3",
-                  size: 209009302
+                  size: 2.1 // 용량 단위 :GB
                 },
                 {
                   index: 1,
                   link:"http://localhost:port/takeout/download/1/takeout-1645757597313-1-2",
-                  size: 20904302
+                  size: 1.8
                 },
                 {
                   index: 2,
                   link:"http://localhost:port/takeout/download/1/takeout-1645757597313-1-1",
-                  size: 232009302
+                  size: 1.7
                 }
         }
         ```
