@@ -521,8 +521,8 @@
     |  | 메서드 | 엔드포인트 | 구현  여부 |
     | --- | --- | --- | --- |
     | addTakeOutRequest | POST | /takeout | o |
-    | getTakeOutRequest | GET | /takeout?userId={userId} | X |
-    | getTakeOutRequestDownladLinks | GET | /takeout/{takeoutId} | X |
+    | getTakeOutRequest | GET | /takeout?userId={userId} | o |
+    | getTakeOutRequestDownladLinks | GET | /takeout/{takeoutId} | o |
     1. addTakeOutRequest
         - EndPoint: [POST] /takeout
         - Description: 유저의 테이크 아웃 요청을 큐에 등록합니다.
