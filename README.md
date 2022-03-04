@@ -29,13 +29,14 @@
 <details>
 <summary>AUTH</summary>
 <div markdown="1">
+  
 - auth
-    
     
     |  | 메서드 | EndPoint |
     | --- | --- | --- |
     | Login(로그인) | POST | /auth/login |
     | signup(회원가입) | POST | /auth/signup |
+  
     1. Login
         - EndPoint: [POST] auth/login
         - Description: username과 password로 로그인합니다. token을 return합니다.
