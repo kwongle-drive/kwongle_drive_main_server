@@ -15,6 +15,32 @@
 - mysql
 - prisma
 
+## .env 
+```.
+# Environment variables declared in this file are automatically made available to Prisma.
+# See the documentation for more detail: https://pris.ly/d/prisma-schema#accessing-environment-variables-from-the-schema
+
+# Prisma supports the native connection string format for PostgreSQL, MySQL, SQLite, SQL Server, MongoDB (Preview) and CockroachDB (Preview).
+# See the documentation for all the connection string options: https://pris.ly/d/connection-strings
+
+DATABASE_URL="mysql://root:root@localhost:3306/kwongledrive"
+
+# SECURE
+JWT_SEC=jwtKey
+
+# DRIVE PATH *드라이브 최상단 경로 해당 경로 밑에 사용자별 드라이브 폴더가 추가됩니다.*
+DRIVE_PATH=C:\Users\userId\...\kwongle_drive_main_server\drives 
+
+
+# TAKEOUT PATH *사용자가 요청한 테이크 아웃 결과 zip파일들이 저장되는 경로, 해당 경로 밑의 사용자별 폴더에 zip파일들이 저장됩니다.*
+TAKEOUT_PATH=C:\Users\userId\...\kwongle_drive_main_server\takeout
+
+# ERROR CLASS PATH
+ERR_PATH =./errors  
+
+# WEB API SERVER URL 
+WEB_API_URL=http://localhost:port
+```
 ## API 문서
 
 
